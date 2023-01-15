@@ -18,7 +18,7 @@ const NavBar = () => {
     ] : [
         {
             label: "Sign In",
-            to: "/sign-in"
+            to: "/profile"
         },
     ];
     const navLinks = [
