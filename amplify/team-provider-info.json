@@ -17,6 +17,9 @@
       },
       "auth": {
         "amplifybloga38e0c2b": {}
+      },
+      "storage": {
+        "postImages": {}
       }
     }
   }
