@@ -3,6 +3,7 @@ import { API, graphqlOperation, Auth } from "aws-amplify";
 import moment from "moment";
 import Link from 'next/link';
 import Head from 'next/head';
+import ReactMarkDown from 'react-markdown'
 
 import { PostsByUsernameQuery } from './api/API';
 import { postsByUsername } from '@/src/graphql/queries';
@@ -12,8 +13,8 @@ const MyPosts = () => {
     const [posts, setPosts] = useState<PostsByUsernameQuery>();
 
     const fetchPosts = async () => {
-        const { username } = await Auth.currentAuthenticatedUser();
-        const postsData = (await API.graphql(graphqlOperation(postsByUsername, { username }))) as {
+        const user = await Auth.currentAuthenticatedUser();
+        const postsData = (await API.graphql(graphqlOperation(postsByUsername, { username: `${user.attributes.sub}::${user.username}` }))) as {
             data: PostsByUsernameQuery
         }
         setPosts(postsData.data);
@@ -44,7 +45,7 @@ const MyPosts = () => {
                                         <div className='text-white text-lg font-medium'>{post?.title}</div>
                                         <div className='text-gray-400 text-sm font-light'>by {post?.username} {moment(post?.updatedAt).fromNow()}</div>
                                         </div>
-                                        <div className='text-white text-lg'>{post?.content}</div>
+                                        <ReactMarkDown className='text-white text-lg'>{post?.content!}</ReactMarkDown>
                                     </Link>
                                 ))}
                             </div>
