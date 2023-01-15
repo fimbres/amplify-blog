@@ -126,7 +126,6 @@ export type ModelSubscriptionTodoFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   title?: ModelSubscriptionStringInput | null,
   content?: ModelSubscriptionStringInput | null,
-  username?: ModelSubscriptionStringInput | null,
   coverImage?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
   or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
@@ -283,6 +282,7 @@ export type PostsByUsernameQuery = {
 
 export type OnCreateTodoSubscriptionVariables = {
   filter?: ModelSubscriptionTodoFilterInput | null,
+  username?: string | null,
 };
 
 export type OnCreateTodoSubscription = {
@@ -300,6 +300,7 @@ export type OnCreateTodoSubscription = {
 
 export type OnUpdateTodoSubscriptionVariables = {
   filter?: ModelSubscriptionTodoFilterInput | null,
+  username?: string | null,
 };
 
 export type OnUpdateTodoSubscription = {
@@ -317,6 +318,7 @@ export type OnUpdateTodoSubscription = {
 
 export type OnDeleteTodoSubscriptionVariables = {
   filter?: ModelSubscriptionTodoFilterInput | null,
+  username?: string | null,
 };
 
 export type OnDeleteTodoSubscription = {
