@@ -14,6 +14,10 @@ const NavBar = () => {
             to: "/create-post"
         },
         {
+            label: "My Posts",
+            to: "/my-posts"
+        },
+        {
             label: "Profile",
             to: "/profile"
         }
