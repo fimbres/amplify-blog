@@ -1,12 +1,12 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
-import { AmplifyAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import { API, Auth } from 'aws-amplify'
-import NavBar from './components/navbar';
 import { useRouter } from 'next/router';
 import { v4 as uuid } from "uuid";
-import { createTodo } from '@/src/graphql/mutations';
 import Head from 'next/head';
 import dynamic from 'next/dynamic'
+
+import NavBar from './components/navbar';
+import { createTodo } from '@/src/graphql/mutations';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 
