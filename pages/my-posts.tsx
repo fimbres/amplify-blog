@@ -39,7 +39,7 @@ const MyPosts = () => {
     return (
         <>
             <Head>
-                <title>Amplify Blog | Home</title>
+                <title>Amplify Blog | My Posts</title>
                 <meta name="description" content="This is a blog developed with Next and Amplify" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
