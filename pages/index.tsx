@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { API, graphqlOperation } from 'aws-amplify'
 
 import { listTodos } from 'src/graphql/queries';
+import { onCreateTodo } from '@/src/graphql/subscriptions';
 import { ListTodosQuery } from '@/src/graphql/API';
 import NavBar from '../components/navbar';
 import PostCard from '../components/postcard';
@@ -19,6 +20,18 @@ export default function Home() {
 
   useEffect(() => {
     fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    const subscription = (API.graphql(
+      graphqlOperation(onCreateTodo)
+    ) as any).subscribe({
+      next: () => fetchPosts()
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   return (
