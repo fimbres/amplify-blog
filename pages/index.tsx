@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import { API, graphqlOperation } from 'aws-amplify'
-import Link from 'next/link';
-import ReactMarkDown from 'react-markdown'
-import moment from 'moment';
 
 import { listTodos } from 'src/graphql/queries';
 import { ListTodosQuery } from 'pages/api/API';
 import NavBar from './components/navbar';
+import PostCard from './components/postcard';
 
 export default function Home() {
   const [posts, setPosts] = useState<ListTodosQuery>();
@@ -38,15 +36,7 @@ export default function Home() {
           <div className='min-h-full w-full'>
             {posts?.listTodos?.items.length ? (
               <div className='flex justify-center items-center min-h-full mt-10 flex-col'>
-                {posts.listTodos.items.map((post, index) => (
-                  <Link key={index} href={`/posts/${post?.id}`} className='bg-neutral-800 w-full rounded-lg px-5 py-3 mb-7'>
-                    <div className='flex space-x-3 items-center'>
-                      <div className='text-white text-lg font-medium'>{post?.title}</div>
-                      <div className='text-gray-400 text-sm font-light'>by {post?.username ? post?.username : "Unknown"} {moment(post?.updatedAt).fromNow()}</div>
-                    </div>
-                    <ReactMarkDown className='text-white text-lg'>{post?.content!}</ReactMarkDown>
-                  </Link>
-                ))}
+                {posts.listTodos.items.map((post, index) => <PostCard key={index} post={post!} />)}
               </div>
             ) : (
               <div className='flex justify-center items-center min-h-full mt-44'>
