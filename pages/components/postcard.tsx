@@ -48,7 +48,7 @@ const PostCard: FC<PostCardProps> = ({ post, deletePost }) => {
         </div>
         {image && <Image src={image} width={50} height={50} alt="Cover Image" className='my-2 object-cover object-center w-full h-24 rounded-lg'/>}
         <ReactMarkDown className='text-white text-lg'>{post?.content!}</ReactMarkDown>
-        {post.comments?.items && post.comments.items.map(comment => (
+        {post.comments && post.comments.items?.map(comment => (
           <div key={comment.id} className='bg-black rounded-lg my-2 text-white ml-5 shadow-2xl px-3 py-1.5 font-light'>
             {comment.createdBy ? comment.createdBy : "Unknown"}: {comment.message}
           </div>
