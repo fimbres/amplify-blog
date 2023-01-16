@@ -9,10 +9,10 @@ import { PostsByUsernameQuery } from './api/API';
 import { postsByUsername } from '@/src/graphql/queries';
 import NavBar from './components/navbar';
 import { deleteTodo } from '@/src/graphql/mutations';
+import PostCard from './components/postcard';
 
 const MyPosts = () => {
     const [posts, setPosts] = useState<PostsByUsernameQuery>();
-    const buttonClassName = ' w-full text-center py-1.5 text-white font-medium rounded-lg hover:opacity-70 ';
 
     const fetchPosts = async () => {
         const user = await Auth.currentAuthenticatedUser();
@@ -51,20 +51,7 @@ const MyPosts = () => {
                     <div className='min-h-full w-full'>
                         {posts ? (
                             <div className='flex justify-center items-center min-h-full mt-10 flex-col'>
-                                {posts.postsByUsername?.items.map((post, index) => (
-                                    <div key={index} className='bg-neutral-800 w-full rounded-lg px-5 py-3 mb-7'>
-                                        <div className='flex space-x-3 items-center'>
-                                        <div className='text-white text-lg font-medium'>{post?.title}</div>
-                                        <div className='text-gray-400 text-sm font-light'>by {post?.username} {moment(post?.updatedAt).fromNow()}</div>
-                                        </div>
-                                        <ReactMarkDown className='text-white text-lg'>{post?.content!}</ReactMarkDown>
-                                        <div className='w-full flex justify-between space-x-2 mt-4'>
-                                            <Link href={`/posts/${post?.id}`} className={buttonClassName + 'bg-black'}>See Post</Link>
-                                            <Link href={`/edit-post/${post?.id}`} className={buttonClassName + 'bg-yellow-400'}>Edit Post</Link>
-                                            <button className={buttonClassName + 'bg-red-500'} onClick={() => deletePost(post?.id!)}>Delete Post</button>
-                                        </div>
-                                    </div>
-                                ))}
+                                {posts.postsByUsername?.items.map((post, index) => <PostCard key={index} post={post!} deletePost={deletePost} />)}
                             </div>
                         ) : (
                             <div className='flex justify-center items-center min-h-full mt-44'>
