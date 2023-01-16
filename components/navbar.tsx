@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 
-import "../../configureAmplify"; 
+import "../configureAmplify"; 
 
 const NavBar = () => {
     const [user, setUser] = useState<any | null>(null);

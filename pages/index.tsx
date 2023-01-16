@@ -3,9 +3,9 @@ import Head from 'next/head'
 import { API, graphqlOperation } from 'aws-amplify'
 
 import { listTodos } from 'src/graphql/queries';
-import { ListTodosQuery } from 'pages/api/API';
-import NavBar from './components/navbar';
-import PostCard from './components/postcard';
+import { ListTodosQuery } from '@/src/graphql/API';
+import NavBar from '../components/navbar';
+import PostCard from '../components/postcard';
 
 export default function Home() {
   const [posts, setPosts] = useState<ListTodosQuery>();

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import moment from "moment";
-import Link from 'next/link';
 import Head from 'next/head';
-import ReactMarkDown from 'react-markdown'
 
-import { PostsByUsernameQuery } from './api/API';
+import { PostsByUsernameQuery } from '../src/graphql/API';
 import { postsByUsername } from '@/src/graphql/queries';
-import NavBar from './components/navbar';
+import NavBar from '../components/navbar';
 import { deleteTodo } from '@/src/graphql/mutations';
-import PostCard from './components/postcard';
+import PostCard from '../components/postcard';
 
 const MyPosts = () => {
     const [posts, setPosts] = useState<PostsByUsernameQuery>();

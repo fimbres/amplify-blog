@@ -6,7 +6,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic'
 import Image from 'next/image';
 
-import NavBar from './components/navbar';
+import NavBar from '../components/navbar';
 import { createTodo } from '@/src/graphql/mutations';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })

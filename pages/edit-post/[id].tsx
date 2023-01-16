@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dynamic from 'next/dynamic'
 import { v4 as uuid } from "uuid";
-
-import NavBar from '../components/navbar';
-import { getTodo, listTodos } from '@/src/graphql/queries';
-import { GetTodoQuery, ListTodosQuery } from '../api/API';
-import { updateTodo } from '@/src/graphql/mutations';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
+
+import NavBar from '../../components/navbar';
+import { getTodo, listTodos } from '@/src/graphql/queries';
+import { GetTodoQuery, ListTodosQuery } from '../../src/graphql/API';
+import { updateTodo } from '@/src/graphql/mutations';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 

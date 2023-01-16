@@ -9,13 +9,12 @@ import dynamic from 'next/dynamic'
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 
-import NavBar from '../components/navbar'
+import NavBar from '../../components/navbar'
 import { listTodos, getTodo } from '@/src/graphql/queries'
-import { GetTodoQuery, ListTodosQuery } from '../api/API'
+import { GetTodoQuery, ListTodosQuery } from '../../src/graphql/API'
 import { createComment } from '@/src/graphql/mutations'
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
-
 
 interface PostPage {
     post: {
