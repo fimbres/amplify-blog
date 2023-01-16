@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { API, graphqlOperation, Storage } from 'aws-amplify'
+import { API, graphqlOperation, Storage, Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import ReactMarkDown from 'react-markdown'
 import Head from 'next/head'
@@ -61,9 +61,16 @@ const Post: NextPage<PostPage> = ({ post }) => {
     const [message, setMessage] = useState('');
     const [showEditor, setShowEditor] = useState(false);
     const router = useRouter();
+    const [user, setUser] = useState<any | null>(null);
+
+    const getUser = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        setUser(user);
+    }
 
     useEffect(() => {
       updateCoverImage();
+      getUser();
     }, [])
     
     const updateCoverImage = async () => {
@@ -124,7 +131,7 @@ const Post: NextPage<PostPage> = ({ post }) => {
                     <div className='text-lg font-light text-white'>by {post.username ? post.username : "Unknown"} {moment(post.updatedAt).fromNow()}</div>
                     <ReactMarkDown className='text-white mt-5 text-lg'>{post.content}</ReactMarkDown>
                 </div>
-                <div className='max-w-xl w-full mx-auto shadow-lg'>
+                {user && <div className='max-w-xl w-full mx-auto shadow-lg'>
                     <button className='w-full text-center py-2 bg-black rounded-md text-white font-medium text-lg my-4 hover:opacity-90' type='button' onClick={() => setShowEditor(!showEditor)}>Write a Comment</button>
                     {showEditor && (
                         <>
@@ -137,7 +144,7 @@ const Post: NextPage<PostPage> = ({ post }) => {
                             <button className='w-full text-center py-2 bg-yellow-400 rounded-md text-white font-medium text-lg my-4 hover:opacity-90' type='button' onClick={sendComment}>Save</button>
                         </>
                     )}
-                </div>
+                </div>}
             </main>
         </>
     )
