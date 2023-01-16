@@ -20,6 +20,12 @@
       },
       "storage": {
         "postImages": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d24ejhm9ev9q47",
+          "type": "cicd"
+        }
       }
     }
   }
