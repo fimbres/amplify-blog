@@ -107,6 +107,10 @@ const Post: NextPage<PostPage> = ({ post }) => {
         }
     }
 
+    if(!post){
+        router.push("/");
+    }
+
     if (router.isFallback) {
         return (
             <div>Loading...</div>
@@ -116,7 +120,7 @@ const Post: NextPage<PostPage> = ({ post }) => {
     return (
         <>
             <Head>
-                <title>Amplify Blog | {post.title}</title>
+                <title>Amplify Blog | {post?.title ? post.title : "Post"}</title>
                 <meta name="description" content="This is a blog developed with Next and Amplify" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
