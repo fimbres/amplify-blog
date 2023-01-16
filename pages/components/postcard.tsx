@@ -7,14 +7,19 @@ import moment from 'moment';
 
 interface PostCardProps {
   post: {
-      __typename: "Todo";
-      id: string;
-      title: string;
-      content: string;
-      username?: string | null | undefined;
-      coverImage?: string | null | undefined;
-      createdAt: string;
-      updatedAt: string;
+    __typename: "Todo";
+    id: string;
+    title: string;
+    content: string;
+    username?: string | null | undefined;
+    coverImage?: string | null | undefined;
+    comments?: {
+        __typename: "ModelCommentConnection";
+        nextToken?: string | null | undefined;
+        items?: any[];
+    } | null | undefined;
+    createdAt: string;
+    updatedAt: string;
   },
   deletePost?: (id: string) => void;
 }
@@ -43,6 +48,11 @@ const PostCard: FC<PostCardProps> = ({ post, deletePost }) => {
         </div>
         {image && <Image src={image} width={50} height={50} alt="Cover Image" className='my-2 object-cover object-center w-full h-24 rounded-lg'/>}
         <ReactMarkDown className='text-white text-lg'>{post?.content!}</ReactMarkDown>
+        {post.comments?.items && post.comments.items.map(comment => (
+          <div key={comment.id} className='bg-black rounded-lg my-2 text-white ml-5 shadow-2xl px-3 py-1.5 font-light'>
+            {comment.createdBy ? comment.createdBy : "Unknown"}: {comment.message}
+          </div>
+        ))}
         {deletePost && <div className='w-full flex justify-between space-x-2 mt-4'>
           <Link href={`/posts/${post?.id}`} className={buttonClassName + 'bg-black'}>See Post</Link>
           <Link href={`/edit-post/${post?.id}`} className={buttonClassName + 'bg-yellow-400'}>Edit Post</Link>

@@ -6,7 +6,7 @@ type Todo @model
 @auth(
   rules: [
     { allow: owner, ownerField: "username" }
-    { allow: public, operations: [ read ] }
+    { allow: public, operations: [ read, create ] }
   ]
 ){
   id: ID!
@@ -21,7 +21,7 @@ type Comment @model
 @auth(
   rules: [
     { allow: owner, ownerField: "createdBy" }
-    { allow: public, operations: [ read ] }
+    { allow: public, operations: [ read, create ] }
   ]
 ){
   id: ID!
