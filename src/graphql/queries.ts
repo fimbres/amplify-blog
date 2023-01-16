@@ -10,6 +10,17 @@ export const getTodo = /* GraphQL */ `
       content
       username
       coverImage
+      comments {
+        items {
+          id
+          message
+          postID
+          createdAt
+          updatedAt
+          createdBy
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -28,6 +39,9 @@ export const listTodos = /* GraphQL */ `
         content
         username
         coverImage
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -56,8 +70,99 @@ export const postsByUsername = /* GraphQL */ `
         content
         username
         coverImage
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getComment = /* GraphQL */ `
+  query GetComment($id: ID!) {
+    getComment(id: $id) {
+      id
+      message
+      post {
+        id
+        title
+        content
+        username
+        coverImage
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      postID
+      createdAt
+      updatedAt
+      createdBy
+    }
+  }
+`;
+export const listComments = /* GraphQL */ `
+  query ListComments(
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        message
+        post {
+          id
+          title
+          content
+          username
+          coverImage
+          createdAt
+          updatedAt
+        }
+        postID
+        createdAt
+        updatedAt
+        createdBy
+      }
+      nextToken
+    }
+  }
+`;
+export const commentsByPostID = /* GraphQL */ `
+  query CommentsByPostID(
+    $postID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentsByPostID(
+      postID: $postID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        message
+        post {
+          id
+          title
+          content
+          username
+          coverImage
+          createdAt
+          updatedAt
+        }
+        postID
+        createdAt
+        updatedAt
+        createdBy
       }
       nextToken
     }

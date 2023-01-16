@@ -13,6 +13,17 @@ export const createTodo = /* GraphQL */ `
       content
       username
       coverImage
+      comments {
+        items {
+          id
+          message
+          postID
+          createdAt
+          updatedAt
+          createdBy
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -29,6 +40,17 @@ export const updateTodo = /* GraphQL */ `
       content
       username
       coverImage
+      comments {
+        items {
+          id
+          message
+          postID
+          createdAt
+          updatedAt
+          createdBy
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -45,8 +67,100 @@ export const deleteTodo = /* GraphQL */ `
       content
       username
       coverImage
+      comments {
+        items {
+          id
+          message
+          postID
+          createdAt
+          updatedAt
+          createdBy
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createComment = /* GraphQL */ `
+  mutation CreateComment(
+    $input: CreateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    createComment(input: $input, condition: $condition) {
+      id
+      message
+      post {
+        id
+        title
+        content
+        username
+        coverImage
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      postID
+      createdAt
+      updatedAt
+      createdBy
+    }
+  }
+`;
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    updateComment(input: $input, condition: $condition) {
+      id
+      message
+      post {
+        id
+        title
+        content
+        username
+        coverImage
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      postID
+      createdAt
+      updatedAt
+      createdBy
+    }
+  }
+`;
+export const deleteComment = /* GraphQL */ `
+  mutation DeleteComment(
+    $input: DeleteCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    deleteComment(input: $input, condition: $condition) {
+      id
+      message
+      post {
+        id
+        title
+        content
+        username
+        coverImage
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      postID
+      createdAt
+      updatedAt
+      createdBy
     }
   }
 `;
